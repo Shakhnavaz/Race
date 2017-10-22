@@ -1,0 +1,80 @@
+# Описываем участников - скорость, нитро, бак, расход топлива, пройденный путь,
+# имя.
+# На выбор: обычная скорость, нитро - расход топлива 3x - каждый ход
+# Побеждает тот, кто приехал первый, либо тот, у кого позже закончилось
+# топливо.
+
+name_car1 = input("Введите название первого автомобиля: ")
+name_car2 = input("Введите название второго автомобиля: ")
+
+def ez(car):
+	car["distance"] += car["speed"]
+	car["fuel"] -= car["expen"]
+
+def nitro(car):
+	car["distance"] += car["nitro"]
+	car["fuel"] -= car["expen"] * 3
+
+def stats(car):
+	print("\nТекущее состояние:",
+		"Топливо: " + str(car["fuel"]),
+		"Расстояние: " + str(car["distance"]) + "/" + str(track),
+		sep = "\n"
+		)
+
+def step1(car):
+	choose = input("Твой ход, " + name_car1 + 
+		". Что будем делать?\n" +
+		"1 - Едем с обычной скоростью.\n" +
+		"2 - Подрубай нитро, Валера!\n"
+		)
+
+	stats(car)
+	input()
+
+def step2(car):
+	choose = input("Твой ход, " + name_car2 + 
+		". Что будем делать?\n" +
+		"1 - Едем с обычной скоростью.\n" +
+		"2 - Подрубай нитро, Валера!\n"
+		)
+
+	if choose == "1":
+		ez(car)
+	elif choose == "2":
+		nitro(car)
+	else:
+		print("Сначала введи правильно!")
+
+	stats(car2)
+	input()
+	
+
+track = 50
+
+car1 = {
+	"speed": 8,
+	"fuel": 30,
+	"expen": 3,
+	"nitro": 11,
+	"distance": 0
+}
+
+car2 = {
+	"speed": 6,
+	"fuel": 40,
+	"expen": 5,
+	"nitro": 13,
+	"distance": 0
+}
+
+while True:
+	step1(car1)
+	step2(car2)
+
+	if car1["fuel"] <= 0:
+		print(name_car1, "," + " он сделал тебя!")
+		break
+	elif car2["fuel"] <= 0:
+		print(name_car2, "," + " он сделал тебя!")
+		break
